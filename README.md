@@ -1,10 +1,14 @@
-# Getting Started with Create React App
+# Jammming Playlist App with Spotify API
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+To install this project, follow these steps:
+
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. run `npm start` to start the development server.
 
 ### `npm start`
 
