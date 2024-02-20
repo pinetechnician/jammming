@@ -1,10 +1,12 @@
 import React from "react";
+import styles from './SearchResults.module.css';
 
-function SearchResults({ matchingTracks }) {
+function SearchResults({ matchingTracks, handleSelectTracks }) {
+    
     return (
-        <div>
+        <div className={styles.searchResultsWrapper}>
         {matchingTracks.map((obj, index) => (
-            <div key={index}>
+            <div key={index} onClick={() => handleSelectTracks(obj)}>
                 <p>Name: {obj.name}</p>
                 <p>Artist: {obj.artist}</p>
                 <p>Album: {obj.album}</p>

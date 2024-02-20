@@ -4,23 +4,27 @@ import React, {useState} from 'react';
 import { trackObjs } from './trackObjData';
 import SearchBar from './components/SearchBar/SearchBar.js';
 import SearchResults from './components/SearchResults/SearchResults.js';
+import Playlist from './components/Playlist/Playlist';
 
 function App() {
   const [keyWord, setKeyWord] = useState('');
+  const [selectedTracks, setSelectedTracks] = useState([]);
 
   function handleSearchInput(e) {
     setKeyWord(e.target.value);
   } 
+  function handleSelectTracks(track) {
+    setSelectedTracks([...selectedTracks, track]);
+  }
 
   const matchingTracks = trackObjs.filter(track => {
-    const lowerCaseKeyWord = keyWord.toLowerCase();
+    const lowerCaseKeyWord = keyWord.toLowerCase().replace(/[^\w\s]/gi, '');
     for (const key in track) { 
-      if (track.hasOwnProperty(key) && track[key].toString().toLowerCase().includes(keyWord)) {
+      if (track.hasOwnProperty(key) && track[key].toString().toLowerCase().replace(/[^\w\s]/gi, '').includes(lowerCaseKeyWord)) {
         return true;
-      } else {
-        return false;
-      }
+      } 
     }
+    return false;
   });
 
   return (
@@ -40,7 +44,8 @@ function App() {
         </a>
       </header>
       <SearchBar keyWord={keyWord} handleSearchInput={handleSearchInput} />
-      {keyWord && <SearchResults matchingTracks={matchingTracks} />}
+      {keyWord && <SearchResults matchingTracks={matchingTracks} handleSelectTracks={handleSelectTracks} />}
+      <Playlist selectedTracks={selectedTracks} />
     </div>
   );
 }

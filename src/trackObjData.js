@@ -6,15 +6,15 @@ export const trackObjs = [
       id: 15610790794
     },
     {
-        name: 'Big_Sprite19',
-        artist: '12/3/2022',
-        album: 13,
-        id: 15610790794
+        name: 'Bohemian Rhapsody',
+        artist: 'Queen',
+        album: 'A Night at the Opera',
+        id: 12387002984
     },
     {
-        name: 'Big_Sprite19',
-        artist: '12/3/2022',
-        album: 13,
-        id: 15610790794
+        name: 'Just the Way You Are',
+        artist: 'Bruno Mars',
+        album: 'Doo-Wops & Hooligans',
+        id: 1927552836
     }
 ]
