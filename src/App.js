@@ -9,12 +9,20 @@ import Playlist from './components/Playlist/Playlist';
 function App() {
   const [keyWord, setKeyWord] = useState('');
   const [selectedTracks, setSelectedTracks] = useState([]);
+  const [playlistName, setPlaylistName] = useState('');
 
   function handleSearchInput(e) {
     setKeyWord(e.target.value);
   } 
   function handleSelectTracks(track) {
     setSelectedTracks([...selectedTracks, track]);
+  }
+  function handleRemoveTracks(trackToRemove) {
+    const updatedTracks = selectedTracks.filter(track => track.id != trackToRemove.id);
+    setSelectedTracks(updatedTracks);
+  }
+  function changePlaylistName(e) {
+    setPlaylistName(e.target.value);
   }
 
   const matchingTracks = trackObjs.filter(track => {
@@ -45,7 +53,12 @@ function App() {
       </header>
       <SearchBar keyWord={keyWord} handleSearchInput={handleSearchInput} />
       {keyWord && <SearchResults matchingTracks={matchingTracks} handleSelectTracks={handleSelectTracks} />}
-      <Playlist selectedTracks={selectedTracks} />
+      <Playlist 
+      selectedTracks={selectedTracks} 
+      deleteTrack={handleRemoveTracks} 
+      playlistName={playlistName}
+      changePlaylistName={changePlaylistName} 
+      />
     </div>
   );
 }

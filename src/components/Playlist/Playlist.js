@@ -1,17 +1,16 @@
 import React from "react";
 import styles from './Playlist.module.css';
+import Tracklist from "../Tracklist/Tracklist";
 
-function Playlist({ selectedTracks }) {
+function Playlist(props) {
     return (
         <div className={styles.PlaylistWrapper}>
-            {selectedTracks.map((obj, index) => (
-            <div key={index} >
-                <p>Name: {obj.name}</p>
-                <p>Artist: {obj.artist}</p>
-                <p>Album: {obj.album}</p>
-                <p>ID: {obj.id}</p>
-            </div>
-        ))}
+            <input value={props.playlistName} onChange={props.changePlaylistName} placeholder="Name This Playlist"></input>
+            <Tracklist 
+            tracks={props.selectedTracks}
+            deleteTrack={props.deleteTrack}
+            isAdd={false}
+            />
         </div>
     );
 }

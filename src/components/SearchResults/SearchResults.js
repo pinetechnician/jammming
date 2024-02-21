@@ -1,18 +1,17 @@
 import React from "react";
 import styles from './SearchResults.module.css';
+import Tracklist from '../Tracklist/Tracklist';
 
 function SearchResults({ matchingTracks, handleSelectTracks }) {
     
     return (
         <div className={styles.searchResultsWrapper}>
-        {matchingTracks.map((obj, index) => (
-            <div key={index} onClick={() => handleSelectTracks(obj)}>
-                <p>Name: {obj.name}</p>
-                <p>Artist: {obj.artist}</p>
-                <p>Album: {obj.album}</p>
-                <p>ID: {obj.id}</p>
-            </div>
-        ))}
+            <h2>Results</h2>
+            <Tracklist 
+            tracks={matchingTracks} 
+            addTrack={handleSelectTracks}
+            isAdd={true}
+            />
     </div>
     );
 }
