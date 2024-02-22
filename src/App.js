@@ -41,6 +41,7 @@ function App() {
 
   return (
     <div className="App">
+      <div className='App-cover'>
       <SearchBar 
       keyWord={keyWord} 
       handleSearchInput={handleSearchInput} 
@@ -57,6 +58,7 @@ function App() {
         playlistName={playlistName}
         changePlaylistName={changePlaylistName} 
         />
+      </div>
       </div>
     </div>
   );

@@ -28,6 +28,7 @@
     cursor: pointer;
     border: 0;
     font-size: 28px;
+    color: aliceblue;
     transition: color 0.3s ease;
 }
 
