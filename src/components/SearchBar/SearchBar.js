@@ -1,10 +1,16 @@
 import React from "react";
+import styles from './SearchBar.module.css';
 
-function SearchBar({ keyWord, handleSearchInput }) {
+function SearchBar({ keyWord, handleSearchInput, handleSearch }) {
+    function handleSubmit(e) {
+        e.preventDefault();
+        handleSearch();
+    }
     return (
         <>
-            <form>
-                <input id="searchBar" value={keyWord} onChange={handleSearchInput} />
+            <form onSubmit={handleSubmit} className={styles.SearchBar} >
+                <input id="searchBar" value={keyWord} onChange={handleSearchInput}/>
+                <button type="submit" className={styles.SearchButton} >SEARCH</button>
             </form>
         </>
 

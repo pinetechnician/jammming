@@ -10,6 +10,7 @@ function App() {
   const [keyWord, setKeyWord] = useState('');
   const [selectedTracks, setSelectedTracks] = useState([]);
   const [playlistName, setPlaylistName] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   function handleSearchInput(e) {
     setKeyWord(e.target.value);
@@ -25,19 +26,44 @@ function App() {
     setPlaylistName(e.target.value);
   }
 
-  const matchingTracks = trackObjs.filter(track => {
-    const lowerCaseKeyWord = keyWord.toLowerCase().replace(/[^\w\s]/gi, '');
-    for (const key in track) { 
-      if (track.hasOwnProperty(key) && track[key].toString().toLowerCase().replace(/[^\w\s]/gi, '').includes(lowerCaseKeyWord)) {
-        return true;
-      } 
-    }
-    return false;
-  });
+  function performSearch() {
+    const lowerCaseKeyword = keyWord.toLowerCase().replace(/[^\w\s]/gi, '');
+    const matchingTracks = trackObjs.filter(track => {
+      for (const key in track) { 
+        if (track.hasOwnProperty(key) && track[key].toString().toLowerCase().replace(/[^\w\s]/gi, '').includes(lowerCaseKeyword)) {
+          return true;
+        } 
+      }
+      return false;
+    });
+    setSearchResults(matchingTracks);
+  };
 
   return (
     <div className="App">
-      <header className="App-header">
+      <SearchBar 
+      keyWord={keyWord} 
+      handleSearchInput={handleSearchInput} 
+      handleSearch={performSearch} />
+      <div className='App-body'>
+        <SearchResults 
+        matchingTracks={searchResults} 
+        handleSelectTracks={handleSelectTracks}
+        keyWord={keyWord}
+        />
+        <Playlist 
+        selectedTracks={selectedTracks} 
+        deleteTrack={handleRemoveTracks} 
+        playlistName={playlistName}
+        changePlaylistName={changePlaylistName} 
+        />
+      </div>
+    </div>
+  );
+}
+
+export default App;
+/*<header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -50,17 +76,4 @@ function App() {
         >
           Learn React
         </a>
-      </header>
-      <SearchBar keyWord={keyWord} handleSearchInput={handleSearchInput} />
-      {keyWord && <SearchResults matchingTracks={matchingTracks} handleSelectTracks={handleSelectTracks} />}
-      <Playlist 
-      selectedTracks={selectedTracks} 
-      deleteTrack={handleRemoveTracks} 
-      playlistName={playlistName}
-      changePlaylistName={changePlaylistName} 
-      />
-    </div>
-  );
-}
-
-export default App;
+      </header>*/
