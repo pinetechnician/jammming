@@ -1,15 +1,18 @@
+//App.js
+
 import logo from './logo.svg';
 import './App.css';
 import React, {useState} from 'react';
-import { trackObjs } from './trackObjData';
+//import { trackObjs } from './trackObjData';
 import SearchBar from './components/SearchBar/SearchBar.js';
 import SearchResults from './components/SearchResults/SearchResults.js';
 import Playlist from './components/Playlist/Playlist';
+import { searchTracks, saveTracks } from './Spotify';
 
 function App() {
   const [keyWord, setKeyWord] = useState('');
   const [selectedTracks, setSelectedTracks] = useState([]);
-  const [playlistName, setPlaylistName] = useState('');
+  const [playlistName, setPlaylistName] = useState('New Playlist');
   const [searchResults, setSearchResults] = useState([]);
 
   function handleSearchInput(e) {
@@ -26,18 +29,12 @@ function App() {
     setPlaylistName(e.target.value);
   }
 
-  function performSearch() {
-    const lowerCaseKeyword = keyWord.toLowerCase().replace(/[^\w\s]/gi, '');
-    const matchingTracks = trackObjs.filter(track => {
-      for (const key in track) { 
-        if (track.hasOwnProperty(key) && track[key].toString().toLowerCase().replace(/[^\w\s]/gi, '').includes(lowerCaseKeyword)) {
-          return true;
-        } 
-      }
-      return false;
-    });
+
+
+  const searchTerm = async(term) => {
+    let matchingTracks = await searchTracks(term);
     setSearchResults(matchingTracks);
-  };
+  }
 
   return (
     <div className="App">
@@ -45,7 +42,7 @@ function App() {
       <SearchBar 
       keyWord={keyWord} 
       handleSearchInput={handleSearchInput} 
-      handleSearch={performSearch} />
+      handleSearch={searchTerm} />
       <div className='App-body'>
         <SearchResults 
         matchingTracks={searchResults} 
@@ -57,6 +54,7 @@ function App() {
         deleteTrack={handleRemoveTracks} 
         playlistName={playlistName}
         changePlaylistName={changePlaylistName} 
+        savePlaylist={saveTracks}
         />
       </div>
       </div>
@@ -78,4 +76,17 @@ export default App;
         >
           Learn React
         </a>
-      </header>*/
+      </header>*/ 
+      
+      /*function performSearch() {
+    const lowerCaseKeyword = keyWord.toLowerCase().replace(/[^\w\s]/gi, '');
+    const matchingTracks = trackObjs.filter(track => {
+      for (const key in track) { 
+        if (track.hasOwnProperty(key) && track[key].toString().toLowerCase().replace(/[^\w\s]/gi, '').includes(lowerCaseKeyword)) {
+          return true;
+        } 
+      }
+      return false;
+    });
+    setSearchResults(matchingTracks);
+  };*/

@@ -4,9 +4,10 @@ import Track from "../Track/Track";
 function Tracklist(props) {
     return (
         <div>
-            {props.tracks.map(obj => (
+            {props.tracks && props.tracks.map(obj => (
                 <Track 
-                id={obj.id} 
+                key={obj.id} 
+                trackURI={obj.uri}
                 onAdd={props.addTrack}
                 onDelete={props.deleteTrack}
                 track={obj}

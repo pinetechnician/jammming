@@ -3,6 +3,11 @@ import styles from './Playlist.module.css';
 import Tracklist from "../Tracklist/Tracklist";
 
 function Playlist(props) {
+    function handleSave(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        props.savePlaylist(props.playlistName, props.selectedTracks);
+    }
     return (
         <div className={styles.PlaylistWrapper}>
             <input value={props.playlistName} onChange={props.changePlaylistName} placeholder="Name This Playlist"></input>
@@ -11,6 +16,7 @@ function Playlist(props) {
             deleteTrack={props.deleteTrack}
             isAdd={false}
             />
+            <button className={styles.SaveButton} type="button" onClick={handleSave}>SAVE TO SPOTIFY</button>
         </div>
     );
 }

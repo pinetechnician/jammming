@@ -1,10 +1,12 @@
+//SearchBar.js
+
 import React from "react";
 import styles from './SearchBar.module.css';
 
 function SearchBar({ keyWord, handleSearchInput, handleSearch }) {
     function handleSubmit(e) {
         e.preventDefault();
-        handleSearch();
+        handleSearch(keyWord);
     }
     return (
         <>
