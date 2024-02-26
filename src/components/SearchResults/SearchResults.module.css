@@ -1,9 +1,23 @@
 .searchResultsWrapper {
     width: 50%;
     height: 950px;
+    overflow-y: scroll;
     margin: 50px auto;
     text-align: left;
     padding: .88rem;
     background-color: rgb(0, 15, 26, 0.7);
     border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+  
+
+  @supports (-ms-ime-align: auto) {
+    *::-ms-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
   }

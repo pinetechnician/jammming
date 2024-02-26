@@ -19,12 +19,11 @@ function authorizeSpotify() {
 
     localStorage.setItem(stateKey, state);
     var scope = 'user-read-private user-read-email playlist-modify-private playlist-modify-public';
-
     var authUrl = 'https://accounts.spotify.com/authorize';
-    authUrl += '?response_type=token';
-    authUrl += '&client_id=' + encodeURIComponent(client_id);
-    authUrl += '&scope=' + encodeURIComponent(scope);
-    authUrl += '&redirect_uri=' + encodeURIComponent(redirect_uri);
+        authUrl += '?response_type=token';
+        authUrl += '&client_id=' + encodeURIComponent(client_id);
+        authUrl += '&scope=' + encodeURIComponent(scope);
+        authUrl += '&redirect_uri=' + encodeURIComponent(redirect_uri);
     authUrl += '&state=' + encodeURIComponent(state);
 
     if(userToken) {
@@ -35,12 +34,13 @@ function authorizeSpotify() {
     const expiresIn = window.location.href.match(/expires_in=([^&]*)/);
     if(accessToken && expiresIn) {
         userToken = accessToken[1];
-        const secondsExpiresIn = Number(expiresIn);
+        const secondsExpiresIn = Number(expiresIn[1]);
         const millisecondsExpiresIn = secondsExpiresIn * 1000;
-        window.setTimeout(() => (userToken = ""), millisecondsExpiresIn);
+        window.setTimeout(() => userToken = "", millisecondsExpiresIn);
         window.history.pushState("Access Token", null, "/");
         return userToken;
     } else {
+        
         window.location.href = authUrl;
     }
 }
@@ -120,11 +120,12 @@ const addPlaylistTracks = async(playlist_id, tracks, accessToken, user_id) => {
 const getUserId = async(accessToken) => {
     try {
         const result = await fetch("https://api.spotify.com/v1/me", {
-        method: "GET", headers: { Authorization: `Bearer ${accessToken}` }
+         headers: { Authorization: `Bearer ${accessToken}` }
         });
 
         let profile =  await result.json();
         let user_id = profile.id;
+        console.log(user_id);
         return user_id;
     } catch(error) {
         console.log("Failed to get user_id:", error);
@@ -140,14 +141,14 @@ const saveTracks = async(name, tracks) => {
         if(addTracksResponse && addTracksResponse.snapshot_id) {
             console.log("Tracks added successfully");
             alert('Playlist added');
-            return true;
+            //return true;
         } else {
             console.log("Failed to add tracks to the playlist.");
-            return false;
+            //return false;
         }
     } else {
         console.log("Failed to create playlist");
-        return false;
+        //return false;
     }
 }
     
