@@ -140,6 +140,7 @@ const saveTracks = async(name, tracks) => {
         const addTracksResponse = await addPlaylistTracks(playlistID, tracks, accessToken, user_id);
         if(addTracksResponse && addTracksResponse.snapshot_id) {
             console.log("Tracks added successfully");
+            window.location.reload();
             alert('Playlist added');
             //return true;
         } else {
