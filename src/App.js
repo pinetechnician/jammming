@@ -42,7 +42,7 @@ function App() {
     saveDataToLocalStorage(playlistName, selectedTracks, keyWord);
   }
   function handleRemoveTracks(trackToRemove) {
-    const updatedTracks = selectedTracks.filter(track => track.id != trackToRemove.id);
+    const updatedTracks = selectedTracks.filter(track => track.id !== trackToRemove.id);
     setSelectedTracks(updatedTracks);
   }
   function changePlaylistName(e) {
