@@ -36,5 +36,13 @@
     color: rgb(179, 224, 255);
 }
 
+@media only screen and (max-width: 1020px) {
+    .trackBody h3 {
+        font-size: 13px;
+    }
+    .trackBody p {
+        font-size: 10px;
+    }
+  }
 
 
