@@ -1,7 +1,7 @@
 //Spotify.js
 
 var client_id = '3c9a59b9279a4c4b82fca9b40847e427';
-var redirect_uri = 'http://localhost:3000/';
+var redirect_uri = process.env.NODE_ENV === 'production' ? 'https://main--famous-parfait-c57744.netlify.app/' : 'http://localhost:3000/';
 let userToken;
 
 function generateRandomString(length) {
