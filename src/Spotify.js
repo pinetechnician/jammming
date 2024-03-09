@@ -1,6 +1,6 @@
 //Spotify.js
 
-var client_id = '3c9a59b9279a4c4b82fca9b40847e427';
+var client_id = process.env.REACT_APP_CLIENT_ID;
 var redirect_uri ='https://main--famous-parfait-c57744.netlify.app/';
 let userToken;
 
