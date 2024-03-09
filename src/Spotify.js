@@ -1,5 +1,3 @@
-//Spotify.js
-
 var client_id = process.env.REACT_APP_CLIENT_ID;
 var redirect_uri ='https://main--famous-parfait-c57744.netlify.app/';
 let userToken;
@@ -73,7 +71,6 @@ const searchTracks = async(query) => {
         }
     } catch(error) {
         console.log('Error Searching Tracks:', error);
-        //throw error;
     }
 }
 const createPlaylist = async(name, user_id, accessToken) => {
@@ -142,14 +139,11 @@ const saveTracks = async(name, tracks) => {
             console.log("Tracks added successfully");
             window.location.reload();
             alert('Playlist added');
-            //return true;
         } else {
             console.log("Failed to add tracks to the playlist.");
-            //return false;
         }
     } else {
         console.log("Failed to create playlist");
-        //return false;
     }
 }
     
